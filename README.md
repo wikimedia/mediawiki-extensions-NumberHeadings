@@ -1,1 +1,0 @@
-Number headings of pages in content namespace.
