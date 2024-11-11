@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mahabarata"
+		]
+	},
+	"numberheadings-desc": "Numéroter les titres dans les espaces de noms de contenu",
+	"numberheadings-conf-exlude-namespaces": "Exclure les espaces de noms de la numérotation des titres",
+	"numberheadings-conf-enable": "Activer la numérotation des titres"
+}
