@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"numberheadings-desc": "Koppen in inhoudsnaamruimten nummeren",
+	"numberheadings-conf-exlude-namespaces": "Naamruimten uitsluiten van kopnummering",
+	"numberheadings-conf-enable": "Kopnummering inschakelen"
+}
