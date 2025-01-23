@@ -2,7 +2,7 @@
 
 namespace MediaWiki\Extension\NumberHeadings;
 
-use Config;
+use MediaWiki\Config\Config;
 use MediaWiki\HookContainer\HookContainer;
 use NamespaceInfo;
 use OutputPage;
