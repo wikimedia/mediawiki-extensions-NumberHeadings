@@ -4,8 +4,8 @@ namespace MediaWiki\Extension\NumberHeadings;
 
 use MediaWiki\Config\Config;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Output\OutputPage;
 use NamespaceInfo;
-use OutputPage;
 
 class ApplyHeadingNumbering {
 
