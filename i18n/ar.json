@@ -5,6 +5,5 @@
 		]
 	},
 	"numberheadings-desc": "عناوين الأرقام في مساحات أسماء المحتوى",
-	"numberheadings-conf-exlude-namespaces": "استبعاد المساحات الاسمية من ترقيم العناوين",
-	"numberheadings-conf-enable": "تمكين ترقيم العناوين"
+	"numberheadings-conf-exlude-namespaces": "استبعاد المساحات الاسمية من ترقيم العناوين"
 }
