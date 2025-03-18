@@ -5,6 +5,5 @@
 		]
 	},
 	"numberheadings-desc": "Numerar le titulos in le spatios de nomines de contento",
-	"numberheadings-conf-exlude-namespaces": "Excluder spatios de nomines del numeration de titulos",
-	"numberheadings-conf-enable": "Activar le numeration de titulos"
+	"numberheadings-conf-exlude-namespaces": "Excluder spatios de nomines del numeration de titulos"
 }

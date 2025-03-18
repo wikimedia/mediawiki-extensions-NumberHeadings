@@ -6,5 +6,6 @@
 	},
 	"numberheadings-desc": "Број на заглавија во содржински именски простори",
 	"numberheadings-conf-exlude-namespaces": "Изземи ги именските простори од набројувањето на заглавија",
-	"numberheadings-conf-enable": "Овозможи набројување на заглавија"
+	"numberheadings-conf-enable-numbering": "Прикажувај редни броеви на заглавијата",
+	"numberheadings-conf-enable-numbering-help": "Додава редни броеви на заглавијата од прегледот на содржината"
 }
