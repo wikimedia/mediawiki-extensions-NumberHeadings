@@ -6,5 +6,7 @@
 	},
 	"numberheadings-desc": "Koppen in inhoudsnaamruimten nummeren",
 	"numberheadings-conf-exlude-namespaces": "Naamruimten uitsluiten van kopnummering",
-	"numberheadings-conf-enable": "Kopnummering inschakelen"
+	"numberheadings-conf-enable": "Kopnummering inschakelen",
+	"numberheadings-conf-enable-numbering": "Kopnummering weergeven",
+	"numberheadings-conf-enable-numbering-help": "Voegt de nummers uit de inhoudsopgave toe aan de paginakoppen"
 }
