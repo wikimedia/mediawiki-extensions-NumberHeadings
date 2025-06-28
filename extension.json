@@ -21,7 +21,9 @@
 		}
 	},
 	"AutoloadNamespaces": {
-		"MediaWiki\\Extension\\NumberHeadings\\": "src/",
+		"MediaWiki\\Extension\\NumberHeadings\\": "src/"
+	},
+	"TestAutoloadNamespaces": {
 		"MediaWiki\\Extension\\NumberHeadings\\Tests\\": "tests/phpunit/"
 	},
 	"ResourceFileModulePaths": {
