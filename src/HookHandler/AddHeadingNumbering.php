@@ -10,26 +10,16 @@ use MediaWiki\Title\NamespaceInfo;
 
 class AddHeadingNumbering {
 
-	/** @var Config */
-	private $config;
-
-	/** @var HookContainer */
-	private $hookContainer;
-
-	/** @var NamespaceInfo */
-	private $namespaceInfo;
-
 	/**
 	 * @param Config $config
 	 * @param HookContainer $hookContainer
 	 * @param NamespaceInfo $namespaceInfo
 	 */
 	public function __construct(
-		Config $config, HookContainer $hookContainer, NamespaceInfo $namespaceInfo
+		private readonly Config $config,
+		private readonly HookContainer $hookContainer,
+		private readonly NamespaceInfo $namespaceInfo
 	) {
-		$this->config = $config;
-		$this->hookContainer = $hookContainer;
-		$this->namespaceInfo = $namespaceInfo;
 	}
 
 	/**
@@ -37,14 +27,14 @@ class AddHeadingNumbering {
 	 * @param string &$text
 	 * @return bool
 	 */
-	public function onOutputPageBeforeHTML( OutputPage $out, &$text ) {
+	public function onOutputPageBeforeHTML( OutputPage $out, &$text ): bool {
 		if ( !$this->config->get( 'NumberHeadingsEnable' ) ) {
 			return true;
 		}
 		$applyHeadingNumbering = new ApplyHeadingNumbering(
-			$out, $this->config, $this->hookContainer, $this->namespaceInfo
+			$this->config, $this->hookContainer, $this->namespaceInfo
 		);
-		$text = $applyHeadingNumbering->apply( $text );
+		$text = $applyHeadingNumbering->apply( $out->getTitle(), $text );
 
 		return true;
 	}
