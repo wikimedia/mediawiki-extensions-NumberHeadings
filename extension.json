@@ -18,14 +18,6 @@
 			"ConfigDefinitionRegistry": {
 				"NumberHeadingsEnable": "MediaWiki\\Extension\\NumberHeadings\\ConfigDefinition\\EnableNumberHeadings::getInstance"
 			}
-		},
-		"PDFCreator": {
-			"PreProcessors": {
-				"NumberHeadings": {
-					"class": "MediaWiki\\Extension\\NumberHeadings\\Integration\\PDFCreator\\PreProcessor\\NumberHeadingsProcessor",
-					"services": [ "MainConfig", "HookContainer", "NamespaceInfo" ]
-				}
-			}
 		}
 	},
 	"AutoloadNamespaces": {
@@ -39,7 +31,7 @@
 		"remoteExtPath": "NumberHeadings/resources"
 	},
 	"Hooks": {
-		"OutputPageBeforeHTML": "number-headings"
+		"ContentAlterParserOutput": "number-headings"
 	},
 	"HookHandlers": {
 		"number-headings": {
