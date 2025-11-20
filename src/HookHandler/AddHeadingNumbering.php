@@ -3,10 +3,12 @@
 namespace MediaWiki\Extension\NumberHeadings\HookHandler;
 
 use MediaWiki\Config\Config;
+use MediaWiki\Content\Content;
 use MediaWiki\Extension\NumberHeadings\ApplyHeadingNumbering;
 use MediaWiki\HookContainer\HookContainer;
-use MediaWiki\Output\OutputPage;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\NamespaceInfo;
+use MediaWiki\Title\Title;
 
 class AddHeadingNumbering {
 
@@ -23,18 +25,22 @@ class AddHeadingNumbering {
 	}
 
 	/**
-	 * @param OutputPage $out
-	 * @param string &$text
-	 * @return bool
+	 * @param Content $content
+	 * @param Title $title
+	 * @param ParserOutput &$output
+	 * @return void
 	 */
-	public function onOutputPageBeforeHTML( OutputPage $out, &$text ): bool {
+	public function onContentAlterParserOutput( Content $content, Title $title, ParserOutput &$output ) {
 		if ( !$this->config->get( 'NumberHeadingsEnable' ) ) {
 			return true;
 		}
+		$text = $output->getText();
+
 		$applyHeadingNumbering = new ApplyHeadingNumbering(
 			$this->config, $this->hookContainer, $this->namespaceInfo
 		);
-		$text = $applyHeadingNumbering->apply( $out->getTitle(), $text );
+
+		$output->setText( $applyHeadingNumbering->apply( $title, $text ) );
 
 		return true;
 	}
