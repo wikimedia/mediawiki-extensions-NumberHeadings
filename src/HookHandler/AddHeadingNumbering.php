@@ -7,6 +7,7 @@ use MediaWiki\Content\Content;
 use MediaWiki\Extension\NumberHeadings\ApplyHeadingNumbering;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Parser\Parsoid\PageBundleParserOutputConverter;
 use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
 
@@ -32,6 +33,9 @@ class AddHeadingNumbering {
 	 */
 	public function onContentAlterParserOutput( Content $content, Title $title, ParserOutput &$output ) {
 		if ( !$this->config->get( 'NumberHeadingsEnable' ) ) {
+			return true;
+		}
+		if ( $output->getExtensionData( PageBundleParserOutputConverter::PARSOID_PAGE_BUNDLE_KEY ) !== null ) {
 			return true;
 		}
 		$text = $output->getText();
