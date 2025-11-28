@@ -13,6 +13,8 @@ use MediaWiki\Title\Title;
 
 class AddHeadingNumbering {
 
+	public const ALREADY_PROCESSED = 'numberheading-already-processed';
+
 	/**
 	 * @param Config $config
 	 * @param HookContainer $hookContainer
@@ -38,6 +40,9 @@ class AddHeadingNumbering {
 		if ( $output->getExtensionData( PageBundleParserOutputConverter::PARSOID_PAGE_BUNDLE_KEY ) !== null ) {
 			return true;
 		}
+		if ( $output->getExtensionData( self::ALREADY_PROCESSED ) !== null ) {
+			return true;
+		}
 		$text = $output->getText();
 
 		$applyHeadingNumbering = new ApplyHeadingNumbering(
@@ -45,6 +50,7 @@ class AddHeadingNumbering {
 		);
 
 		$output->setText( $applyHeadingNumbering->apply( $title, $text ) );
+		$output->setExtensionData( self::ALREADY_PROCESSED, true );
 
 		return true;
 	}
