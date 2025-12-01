@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\NumberHeadings\HookHandler;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Content\Content;
+use MediaWiki\Content\TextContent;
 use MediaWiki\Extension\NumberHeadings\ApplyHeadingNumbering;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Parser\ParserOutput;
@@ -37,12 +38,22 @@ class AddHeadingNumbering {
 		if ( !$this->config->get( 'NumberHeadingsEnable' ) ) {
 			return true;
 		}
+		if ( !( $content instanceof TextContent ) ) {
+			return true;
+		}
 		if ( $output->getExtensionData( PageBundleParserOutputConverter::PARSOID_PAGE_BUNDLE_KEY ) !== null ) {
 			return true;
 		}
 		if ( $output->getExtensionData( self::ALREADY_PROCESSED ) !== null ) {
 			return true;
 		}
+		if ( !$output->hasText() ) {
+			return true;
+		}
+		// Intentionally using deprecated `getText`/`setText` here, as new `DefaultOutputPipelineFactory`
+		// is marked as "unstable".
+		// https://github.com/wikimedia/mediawiki/blob/1.43.5/includes/OutputTransform/DefaultOutputPipelineFactory.php#L27
+		// We can not use `getRawText` as it does not provide the required markup.
 		$text = $output->getText();
 
 		$applyHeadingNumbering = new ApplyHeadingNumbering(
