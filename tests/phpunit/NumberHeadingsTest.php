@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\NumberHeadings\tests\phpunit;
+namespace MediaWiki\Extension\NumberHeadings\Tests;
 
 use MediaWiki\Extension\NumberHeadings\NumberHeadings;
 use PHPUnit\Framework\TestCase;
