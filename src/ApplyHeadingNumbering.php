@@ -53,8 +53,14 @@ class ApplyHeadingNumbering {
 			return $html;
 		}
 
-		$headingNumbering = new NumberHeadings();
+		$numberHeadings = new NumberHeadings();
+		$newHtml = $numberHeadings->execute( $html, $prefix );
 
-		return $headingNumbering->execute( $html, $prefix );
+		$this->hookContainer->run(
+			'NumberHeadingsAfterApply',
+			[ $title, &$newHtml ]
+		);
+
+		return $newHtml;
 	}
 }
