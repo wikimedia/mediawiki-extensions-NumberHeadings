@@ -52,11 +52,8 @@ class AddHeadingNumbering {
 		if ( !$output->hasText() ) {
 			return true;
 		}
-		// Intentionally using deprecated `getText`/`setText` here, as new `DefaultOutputPipelineFactory`
-		// is marked as "unstable".
-		// https://github.com/wikimedia/mediawiki/blob/1.43.5/includes/OutputTransform/DefaultOutputPipelineFactory.php#L27
-		// We can not use `getRawText` as it does not provide the required markup.
-		$text = $output->getText();
+
+		$text = $output->getContentHolderText();
 
 		$applyHeadingNumbering = new ApplyHeadingNumbering(
 			$this->config, $this->hookContainer, $this->namespaceInfo
