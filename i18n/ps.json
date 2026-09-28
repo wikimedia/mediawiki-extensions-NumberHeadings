@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"شاه زمان پټان"
+		]
+	},
+	"numberheadings-desc": "د منځپانگې نوم‌تشيال کې د سرليکونو شمېرې",
+	"numberheadings-conf-exlude-namespaces": "سرليک شمېرنې څخه د نوم‌تشيالونو راويستل",
+	"numberheadings-conf-enable-numbering": "سرليک شمېرنه ښودل",
+	"numberheadings-conf-enable-numbering-help": "د نيوليک څخه شمېرې د مخ سرليکونو ته ورگډوي"
+}
