@@ -59,7 +59,7 @@ class AddHeadingNumbering {
 			$this->config, $this->hookContainer, $this->namespaceInfo
 		);
 
-		$output->setText( $applyHeadingNumbering->apply( $title, $text ) );
+		$output->setRawText( $applyHeadingNumbering->apply( $title, $text ) );
 		$output->setExtensionData( self::ALREADY_PROCESSED, true );
 
 		return true;
