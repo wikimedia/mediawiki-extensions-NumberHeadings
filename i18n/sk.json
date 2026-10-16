@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"numberheadings-desc": "Číslovanie nadpisov v obsahových menných priestoroch",
+	"numberheadings-conf-exlude-namespaces": "Vylúčiť menné priestory z číslovania nadpisov",
+	"numberheadings-conf-enable-numbering": "Zobrazovať číslovanie nadpisov",
+	"numberheadings-conf-enable-numbering-help": "Pridáva k nadpisom stránky čísla z obsahu"
+}
