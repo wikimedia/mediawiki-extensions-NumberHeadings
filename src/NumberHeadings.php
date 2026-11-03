@@ -27,7 +27,12 @@ class NumberHeadings {
 	 * @return array
 	 */
 	private function buildHeadingMap( string $html ): array {
-		$regEx = '#<h(\d)>(.*?)<span class="mw-headline" id="(.*?)">(.*?)</span>(.*?)</h(\d)>#';
+		// Branch reset keeps the captures identical for legacy and modern headings.
+		$regEx = '#(?|'
+			. '(<h([1-6])>(?:(?!</h\2>).)*?<span class="mw-headline" id="[^"]*">)'
+			. '(.*?)(</span>.*?</h\2>)'
+			. '|(<h([1-6])\b[^>]*\sid="[^"]*"[^>]*>)(.*?)(</h\2>)'
+			. ')#s';
 
 		$headings = [];
 		$matches = [];
@@ -39,11 +44,10 @@ class NumberHeadings {
 		for ( $index = 0; $index < count( $matches[0] ); $index++ ) {
 			$headings[] = [
 				'search' => $matches[0][$index],
-				'level' => (int)$matches[1][$index],
-				'pre' => $matches[2][$index],
-				'id' => $matches[3][$index],
-				'text' => $matches[4][$index],
-				'post' => $matches[5][$index],
+				'level' => (int)$matches[2][$index],
+				'pre' => $matches[1][$index],
+				'text' => $matches[3][$index],
+				'post' => $matches[4][$index],
 			];
 		}
 
@@ -70,10 +74,11 @@ class NumberHeadings {
 			$this->resetHeadingCounter( $level + 1 );
 			$numbering = $this->getHeadingNumbering( $prefix );
 
-			$html = preg_replace(
+			$html = preg_replace_callback(
 				$this->getReplacementRegEx( $headings[$index] ),
-				$this->getReplacementHtml( $numbering, $headings[$index] ),
-				$html
+				fn () => $this->getReplacementHtml( $numbering, $headings[$index] ),
+				$html,
+				1
 			);
 		}
 
@@ -85,13 +90,7 @@ class NumberHeadings {
 	 * @return string
 	 */
 	private function getReplacementRegEx( array $item ): string {
-		$level = $item['level'];
-		$id = $item['id'];
-
-		$regEx = '#<h' . $level . '>(.*?)<span class="mw-headline" id="' . preg_quote( $id, '#' ) . '">';
-		$regEx .= '(.*?)</span>.*?</h' . $level . '>#';
-
-		return $regEx;
+		return '#' . preg_quote( $item['search'], '#' ) . '#';
 	}
 
 	/**
@@ -100,19 +99,11 @@ class NumberHeadings {
 	 * @return string
 	 */
 	private function getReplacementHtml( string $numbering, array $item ): string {
-		$level = $item['level'];
-		$id = $item['id'];
 		$text = $item['text'];
 		$pre = $item['pre'];
 		$post = $item['post'];
 
-		$html = '<h' . $level . '>';
-		$html .= $pre;
-		$html .= '<span class="mw-headline" id="' . $id . '">' . $numbering . $text . '</span>';
-		$html .= $post;
-		$html .= '</h' . $level . '>';
-
-		return $html;
+		return $pre . $numbering . $text . $post;
 	}
 
 	/**
